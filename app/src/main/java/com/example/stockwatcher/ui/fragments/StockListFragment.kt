@@ -1,4 +1,4 @@
-package com.example.stockwatcher.fragments
+package com.example.stockwatcher.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stockwatcher.R
-import com.example.stockwatcher.recyclerviews.adapters.StockRVAdapter
+import com.example.stockwatcher.ui.adapters.StockRVAdapter
 
 class StockListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {

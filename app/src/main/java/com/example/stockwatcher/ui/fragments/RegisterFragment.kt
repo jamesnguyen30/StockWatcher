@@ -1,4 +1,4 @@
-package com.example.stockwatcher.fragments
+package com.example.stockwatcher.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
