@@ -1,4 +1,4 @@
-package com.example.stockwatcher.ui.fragments
+package com.example.stockwatcher.ui.fragments.watching
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.stockwatcher.R
 import com.example.stockwatcher.ui.adapters.StockRVAdapter
 
-class StockListFragment : Fragment() {
+class WatchingFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -20,7 +20,7 @@ class StockListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_stock_list, container, false)
+        var view = inflater.inflate(R.layout.fragment_watching, container, false)
         var recyclerView: RecyclerView = view.findViewById(R.id.stock_recycler_view)
         recyclerView.adapter = StockRVAdapter()
         recyclerView.layoutManager = LinearLayoutManager(view.context)

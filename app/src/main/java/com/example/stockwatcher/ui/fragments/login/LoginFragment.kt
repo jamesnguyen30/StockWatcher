@@ -1,6 +1,7 @@
-package com.example.stockwatcher.ui.fragments
+package com.example.stockwatcher.ui.fragments.login
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.stockwatcher.R
 import com.example.stockwatcher.databinding.FragmentLoginBinding
-import com.example.stockwatcher.ui.viewmodels.LoginViewModel
+import com.example.stockwatcher.ui.activities.MainActivity
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 
@@ -55,27 +56,29 @@ class LoginFragment: Fragment(R.layout.fragment_login), View.OnClickListener{
         }
 
         navController = Navigation.findNavController(view)
-        view.findViewById<Button>(R.id.stock_list_button).setOnClickListener(this);
         view.findViewById<Button>(R.id.register_button).setOnClickListener(this);
-        view.findViewById<Button>(R.id.profile_button).setOnClickListener(this);
+        view.findViewById<Button>(R.id.testButton).setOnClickListener(this);
     }
 
     override fun onClick(v: View?) {
        when(v!!.id){
-           R.id.profile_button -> navController!!.navigate(R.id.action_loginFragment_to_profileFragment)
-           R.id.stock_list_button -> navController!!.navigate(R.id.action_loginFragment_to_stockListFragment)
            R.id.register_button-> navController!!.navigate(R.id.action_loginFragment_to_registerFragment)
+           R.id.testButton-> {
+               println("Starting main activity")
+               //Start main activity
+               val intent = Intent(v!!.context, MainActivity::class.java)
+               intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+               startActivity(intent)
+           }
        }
     }
 
     fun handleResponse(context: Context, isAuthenticated: Boolean){
         if(isAuthenticated){
             Toast.makeText(context, "Login Successful", LENGTH_SHORT)
-            navController!!.navigate(R.id.action_loginFragment_to_profileFragment)
         } else {
             Toast.makeText(context, "Login Failed", LENGTH_SHORT)
         }
-
     }
 
     fun handleError(context: Context, error: Throwable){

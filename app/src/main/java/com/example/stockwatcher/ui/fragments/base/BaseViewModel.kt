@@ -1,4 +1,4 @@
-package com.example.stockwatcher.ui.viewmodels
+package com.example.stockwatcher.ui.fragments.base
 
 import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -11,6 +11,7 @@ abstract class BaseViewModel : ViewModel(){
     private var mCompositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun onCleared() {
+        println("dispose observable")
         mCompositeDisposable.clear()
         super.onCleared()
     }
