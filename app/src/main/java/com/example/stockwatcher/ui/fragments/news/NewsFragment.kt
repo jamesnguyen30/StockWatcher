@@ -5,9 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.stockwatcher.R
+import com.example.stockwatcher.databinding.FragmentNewsBinding
+import com.example.stockwatcher.ui.adapters.NewsAdapter
 
-class NewsFragment : Fragment() {
+class NewsFragment : Fragment(R.layout.fragment_news) {
+
+    lateinit var binding: FragmentNewsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,6 +25,12 @@ class NewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news, container, false)
+        binding =  DataBindingUtil.inflate(inflater, R.layout.fragment_news, container, false )
+
+        var recyclerView: RecyclerView = binding.newsRecyclerView
+        recyclerView.adapter = NewsAdapter()
+        recyclerView.layoutManager = LinearLayoutManager(binding.root.context)
+
+        return binding.root
     }
 }

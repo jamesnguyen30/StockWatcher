@@ -3,7 +3,7 @@ package com.example.stockwatcher.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.stockwatcher.Stock
+import com.example.stockwatcher.data.models.Stock
 import com.example.stockwatcher.databinding.StockItemViewholderBinding
 
 class StockRVAdapter: RecyclerView.Adapter<StockRVAdapter.StockListViewHolder>() {
@@ -12,10 +12,34 @@ class StockRVAdapter: RecyclerView.Adapter<StockRVAdapter.StockListViewHolder>()
 
     init{
         mockArray = ArrayList()
-        mockArray.add(Stock("url1", "Title 1", "Description 1"))
-        mockArray.add(Stock("url2", "Title 2", "Description 1"))
-        mockArray.add(Stock("url3", "Title 3", "Description 1"))
-        mockArray.add(Stock("url4", "Title 4", "Description 1"))
+        mockArray.add(
+            Stock(
+                "url1",
+                "Title 1",
+                "Description 1"
+            )
+        )
+        mockArray.add(
+            Stock(
+                "url2",
+                "Title 2",
+                "Description 1"
+            )
+        )
+        mockArray.add(
+            Stock(
+                "url3",
+                "Title 3",
+                "Description 1"
+            )
+        )
+        mockArray.add(
+            Stock(
+                "url4",
+                "Title 4",
+                "Description 1"
+            )
+        )
     }
 
     class StockListViewHolder(binding: StockItemViewholderBinding): RecyclerView.ViewHolder(binding.root) {

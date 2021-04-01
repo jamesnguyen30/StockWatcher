@@ -5,7 +5,7 @@
     <data>
         <variable
             name="stock"
-            type="com.example.stockwatcher.Stock" />
+            type="com.example.stockwatcher.data.models.Stock" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
