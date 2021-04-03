@@ -1,14 +1,29 @@
 package com.example.stockwatcher.ui.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.stockwatcher.data.models.RetroPhoto
 import com.example.stockwatcher.data.models.Stock
 import com.example.stockwatcher.databinding.StockItemViewholderBinding
 
-class StockRVAdapter: RecyclerView.Adapter<StockRVAdapter.StockListViewHolder>() {
+class StockRVAdapter: RecyclerView.Adapter<StockRVAdapter.StockListViewHolder> {
 
     var mockArray:ArrayList<Stock>
+    var dataList: List<RetroPhoto>?;
+    var context: Context?
+
+    constructor(){
+        context = null
+        dataList = null
+    }
+
+
+    constructor(context: Context, dataList: List<RetroPhoto>){
+        this.dataList = dataList
+        this.context = context
+    }
 
     init{
         mockArray = ArrayList()
@@ -65,5 +80,6 @@ class StockRVAdapter: RecyclerView.Adapter<StockRVAdapter.StockListViewHolder>()
         var stock = mockArray.get(position)
         holder.bind(stock)
     }
+
 
 }
