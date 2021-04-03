@@ -11,19 +11,19 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stockwatcher.R
-import com.example.stockwatcher.data.models.RetroPhoto
-import com.example.stockwatcher.data.repository.GetDataService
-import com.example.stockwatcher.data.repository.RetrofitClientInstance
-import com.example.stockwatcher.ui.activities.MainActivity
+import com.example.stockwatcher.api.MockAPIService
+import com.example.stockwatcher.api.RetrofitClientInstance
+import com.example.stockwatcher.data.models.Post
 import com.example.stockwatcher.ui.adapters.StockRVAdapter
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class WatchingFragment : Fragment() {
 
-    lateinit var getDataService: GetDataService
+    lateinit var mockApiService: MockAPIService
     var recyclerView: RecyclerView? = null;
+    var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,36 +39,34 @@ class WatchingFragment : Fragment() {
         recyclerView = view.findViewById(R.id.stock_recycler_view)
         recyclerView!!.adapter = StockRVAdapter()
         recyclerView!!.layoutManager = LinearLayoutManager(view.context)
-        retrofitGetPhotos(view.context)
 
+        getPosts(view.context)
         return view;
     }
 
     fun createService(){
-       getDataService = RetrofitClientInstance.retrofit.create(GetDataService::class.java)
+       mockApiService = RetrofitClientInstance.retrofit.create(MockAPIService::class.java)
     }
 
-    fun retrofitGetPhotos(context: Context){
-        var call: Call<List<RetroPhoto>> = getDataService.getAllPhotos()
+    fun getPosts(context: Context) {
+        var getPost = mockApiService.getPosts()
+        var disposable = getPost.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+               processResponse(it)
+            },{
+                Toast.makeText(context, "Error calling API.\n${it}", Toast.LENGTH_SHORT).show()
+            })
 
-        call.enqueue(object: Callback<List<RetroPhoto>> {
-            override fun onFailure(call: Call<List<RetroPhoto>>?, t: Throwable?) {
-                Toast.makeText(context, "Can't call API", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onResponse(
-                call: Call<List<RetroPhoto>>?,
-                response: Response<List<RetroPhoto>>?
-            ) {
-
-                processResponse(response!!.body())
-                Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
-            }
-        })
+        compositeDisposable.add(disposable)
     }
 
-    fun processResponse(photos: List<RetroPhoto>){
-        Log.d("Retrofit", "Photo instance" + photos[0].toString())
+    fun processResponse(posts: List<Post>){
+        Log.d("Retrofit", "Photo instance" + posts[0].toString())
+    }
+
+    override fun onStop() {
+        super.onStop()
+        compositeDisposable.clear()
     }
 
 }

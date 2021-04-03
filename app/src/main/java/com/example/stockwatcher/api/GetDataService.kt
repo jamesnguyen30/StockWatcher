@@ -1,4 +1,4 @@
-package com.example.stockwatcher.data.repository
+package com.example.stockwatcher.api
 
 import com.example.stockwatcher.data.models.RetroPhoto
 import retrofit2.Call
