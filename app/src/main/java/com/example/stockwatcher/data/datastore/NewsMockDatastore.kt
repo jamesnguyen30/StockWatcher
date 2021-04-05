@@ -1,27 +1,24 @@
 package com.example.stockwatcher.data.datastore
 
-import com.example.stockwatcher.data.models.News
+import com.example.stockwatcher.api.models.News
 
 class NewsMockDatastore(){
 
-    var mockArray:ArrayList<News> = ArrayList()
-    init{
+    var newsData: ArrayList<News> = ArrayList()
 
-        mockArray.add(News("abc", "Did Delta Air Lines CEO Praise Georgia’s New Voting Law?", "Delta believes that full and equal access to voting is a fundamental right for all citizens. Over the past several weeks, Delta engaged extensively with state elected officials in both parties to express our strong view that Georgia must have a fair and secure election process, with broad voter participation and equal access to the polls. The legislation signed this week improved considerably during the legislative process, and expands weekend voting, codifies Sunday voting and protects a voter’s ability to cast an absentee ballot without providing a reason. For the first time, drop boxes have also been authorized for all counties statewide and poll workers will be allowed to work across county lines. Nonetheless, we understand concerns remain over other provisions in the legislation, and there continues to be work ahead in this important effort. We are committed to continuing to listen to our people and our communities, and engage with leaders from both parties to ensure every eligible employee and Georgia voter can exercise their right to vote."))
-        mockArray.add(News("abc", "Mass Covid-19 vaccination will not lead to ‘out of control’ variants", "A scientist’s open letter to the World Health Organization claims that the large-scale Covid-19 vaccination drives currently underway around the world should cease before they produce the catastrophic appearance of more deadly variants of the coronavirus and increased risk for younger people. But medical experts say the claims are false and that vaccination is urgently needed to control virus mutation through widespread immunity."))
-        mockArray.add(News("abc", "Is the Biden Administration Creating or Mandating ‘COVID-19 Passports’?", "As more than one year passes since COVID-19 was declared a pandemic, Snopes is still fighting an “infodemic” of rumors and misinformation, and you can help. Find out what we’ve learned and how to inoculate yourself against COVID-19 misinformation. Read the latest fact checks about the vaccines. Submit any questionable rumors and “advice” you encounter. Become a Founding Member to help us hire more fact-checkers. And, please, follow the CDC or WHO for guidance on protecting your community from the disease."))
-        mockArray.add(News("abc", "Fact check: COVID-19 vaccine not associated with neurodegenerative disease", "Underlying reasons for the misfolding vary: In some prion diseases like fatal insomnia (FI) or certain types of Creutzfeldt-Jakob disease (CJD), it's genetics. In others like bovine spongiform encephalopathy (BSE), popularly known as \"mad cow disease,\" it's transmitted by eating infected animal products"))
-        mockArray.add(News("abc", "Just how severe will America's minority rule become?", "Those who make this case seem to love sounding like erudite constitutional scholars steeped in the grandeur of American history, and they purport to be pluralists worrying about minority rights."))
-        mockArray.add(News("abc", "Yes, You Can Retire on Dividends. 10 Stocks to Build an Income Stream for the Long Haul.", "Dividends from his retirement accounts are transferred every month into a taxable account to cover required minimum distributions, or RMDs—which kick in after a retiree hits 72, up from age 70½ previously. His holdings include PepsiCo (ticker: PEP), CVS Health (CVS), and Prudential Financial (PRU)—longtime dividend payers that sport yields well above the S&P 500 index’s average of about 1.5%. The yield on the dividend stocks in his portfolio was recently 4.5%."))
-        mockArray.add(News("abc", "There's a Hidden App on Your iPhone — One That Won't Show Up on Your Home Screen or App Library", "Every once in a while, an iOS secret surfaces that makes me wonder, \"How am I just learning about this?\" I remember the first time I found out how to delete numbers in the Calculator app, and when I discovered you could bulk-move apps around the home screen. Now, there's another tip to add to the list: a hidden iOS app whose icon you quite literally can't find unless you know where to look."))
-        mockArray.add(News("abc", "Video Shows Smuggler ‘Viciously’ Dropping Two Young Girls From 14-Foot Border Wall", "Smugglers have been caught on camera dropping two young girls from a 14-foot-high border wall in New Mexico. The two Ecuadorian girls—sisters aged three and five—were dropped from the border barrier west of Mt. Cristo Rey, according to U.S. Customs and Border Protection. In the video, two men on the Mexico side can be seen running away, leaving the children alone in the desert. The scene was caught on camera by a Border Patrol agent who then rescued the girls and took them to a hospital where they were medically cleared. “I’m appalled by the way these smugglers viciously dropped innocent children from a 14-foot border barrier last night,” El Paso Sector Chief Patrol Agent Gloria Chavez said. “If not for the vigilance of our agents using mobile technology, these two tender-aged siblings would have been exposed to the harsh elements of desert environment for hours.” Homeland Security Secretary Alejandro Mayorkas said: “The inhumane way smugglers abuse children while profiting off parents’ desperation is criminal and morally reprehensible.”"))
+    fun updateNewsData(newsData: ArrayList<News>){
+        this.newsData = newsData
     }
 
-    fun getNews(position: Int): News{
-        return mockArray.get(position)
+    fun totalNews(): Int{
+        return newsData.size
     }
 
-    fun getLength():Int{
-        return mockArray.size
+    fun getNews(position: Int): News {
+        return newsData.get(position)
+    }
+
+    fun addNews(news: News){
+        newsData.add(news)
     }
 }
