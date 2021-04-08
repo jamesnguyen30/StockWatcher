@@ -1,4 +1,4 @@
-package com.example.stockwatcher.ui.adapters
+package com.example.stockwatcher.ui.fragments.news
 
 import android.util.Log
 import android.view.LayoutInflater

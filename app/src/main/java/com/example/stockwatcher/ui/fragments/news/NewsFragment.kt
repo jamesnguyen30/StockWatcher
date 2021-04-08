@@ -1,8 +1,6 @@
 package com.example.stockwatcher.ui.fragments.news
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,26 +8,27 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.stockwatcher.R
-import com.example.stockwatcher.api.RetrofitClientInstance
 import com.example.stockwatcher.api.models.News
 import com.example.stockwatcher.api.models.NewsApiResponse
-import com.example.stockwatcher.api.services.NewsApiService
 import com.example.stockwatcher.databinding.FragmentNewsBinding
-import com.example.stockwatcher.ui.adapters.NewsAdapter
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.schedulers.Schedulers
+import com.example.stockwatcher.di.component.DaggerFragmentComponent
+import com.example.stockwatcher.di.component.FragmentComponent
+import com.example.stockwatcher.di.module.ViewModelModule
+import javax.inject.Inject
 
 class NewsFragment : Fragment(R.layout.fragment_news), NewsNavigator {
 
     lateinit var binding: FragmentNewsBinding
     var adapter: NewsAdapter = NewsAdapter()
-    var viewModel: NewsViewModel = NewsViewModel()
+
+
+    @Inject
+    lateinit var viewModel: NewsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        buildComponent().inject(this)
         viewModel.setNavigator(this)
     }
 
@@ -56,5 +55,11 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsNavigator {
 
     override fun handleError(error: Throwable) {
         Toast.makeText(activity, "Error retriving news", Toast.LENGTH_SHORT).show()
+    }
+
+    fun buildComponent(): FragmentComponent{
+         return DaggerFragmentComponent.builder()
+                .viewModelModule(ViewModelModule())
+                .build()
     }
 }

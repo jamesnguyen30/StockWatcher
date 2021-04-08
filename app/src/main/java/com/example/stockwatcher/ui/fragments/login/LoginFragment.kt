@@ -18,13 +18,19 @@ import com.example.stockwatcher.databinding.FragmentLoginBinding
 import com.example.stockwatcher.ui.activities.MainActivity
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
+import javax.inject.Inject
 
 class LoginFragment: Fragment(R.layout.fragment_login), View.OnClickListener{
 
     var navController: NavController?=null
     lateinit var binding: FragmentLoginBinding
 
-    var viewModel: LoginViewModel = LoginViewModel()
+    @Inject
+    lateinit var viewModel: LoginViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

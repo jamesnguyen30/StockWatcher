@@ -1,4 +1,4 @@
-package com.example.stockwatcher.ui.adapters
+package com.example.stockwatcher.ui.fragments.watching
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import com.example.stockwatcher.data.models.RetroPhoto
 import com.example.stockwatcher.data.models.Stock
 import com.example.stockwatcher.databinding.StockItemViewholderBinding
 
-class StockRVAdapter: RecyclerView.Adapter<StockRVAdapter.StockListViewHolder> {
+class WatchingAdapter: RecyclerView.Adapter<WatchingAdapter.StockListViewHolder> {
 
     var mockArray:ArrayList<Stock>
     var dataList: List<RetroPhoto>?;
@@ -69,7 +69,9 @@ class StockRVAdapter: RecyclerView.Adapter<StockRVAdapter.StockListViewHolder> {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StockListViewHolder {
         var inflater:LayoutInflater = LayoutInflater.from(parent.context)
         var itemBinding: StockItemViewholderBinding = StockItemViewholderBinding.inflate(inflater, parent, false)
-        return StockListViewHolder(itemBinding)
+        return StockListViewHolder(
+            itemBinding
+        )
     }
 
     override fun getItemCount(): Int {

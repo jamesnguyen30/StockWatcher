@@ -3,7 +3,7 @@ package com.example.stockwatcher.ui.fragments.news
 import android.util.Log
 import com.example.stockwatcher.api.RetrofitClientInstance
 import com.example.stockwatcher.api.services.NewsApiService
-import com.example.stockwatcher.ui.fragments.base.BaseViewModel
+import com.example.stockwatcher.ui.base.BaseViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
