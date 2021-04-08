@@ -3,12 +3,12 @@ package com.example.stockwatcher.ui.fragments.base
 import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
+import java.lang.ref.WeakReference
 
-//the line below will be usued when Navigator is implemented
-//abstract class BaseViewModel<T> : ViewModel(){
-abstract class BaseViewModel : ViewModel(){
+abstract class BaseViewModel<T> : ViewModel(){
 
     private var mCompositeDisposable: CompositeDisposable = CompositeDisposable()
+    private var navigator:WeakReference<T>? = null;
 
     override fun onCleared() {
         println("dispose observable")
@@ -22,5 +22,13 @@ abstract class BaseViewModel : ViewModel(){
 
     fun addToDisposable(disposable: Disposable){
         mCompositeDisposable.add(disposable)
+    }
+
+    fun getNavigator(): T?{
+        return navigator!!.get();
+    }
+
+    fun setNavigator(navigator: T){
+        this.navigator = WeakReference(navigator)
     }
 }

@@ -5,7 +5,7 @@ import com.example.stockwatcher.ui.fragments.base.BaseViewModel
 import io.reactivex.rxjava3.core.Observable
 import java.util.concurrent.TimeUnit
 
-class LoginViewModel : BaseViewModel(){
+class LoginViewModel : BaseViewModel<LoginNavigator>(){
     fun isValidPassword(password: String): Boolean{
         return TextUtils.isEmpty(password)
     }

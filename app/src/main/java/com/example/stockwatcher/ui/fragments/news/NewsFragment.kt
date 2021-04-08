@@ -22,16 +22,15 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class NewsFragment : Fragment(R.layout.fragment_news) {
+class NewsFragment : Fragment(R.layout.fragment_news), NewsNavigator {
 
     lateinit var binding: FragmentNewsBinding
-    var compositeDisposable: CompositeDisposable = CompositeDisposable()
-    lateinit var newsApiService: NewsApiService
-    var recyclerView: RecyclerView? = null;
     var adapter: NewsAdapter = NewsAdapter()
+    var viewModel: NewsViewModel = NewsViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel.setNavigator(this)
     }
 
     override fun onCreateView(
@@ -40,41 +39,22 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     ): View? {
         binding =  DataBindingUtil.inflate(inflater, R.layout.fragment_news, container, false )
 
-        var recyclerView: RecyclerView = binding.newsRecyclerView
+        val recyclerView = binding.newsRecyclerView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(binding.root.context)
 
-        createService()
-        getNews(binding.root.context)
+        viewModel.getNews()
+
         return binding.root
     }
 
-    fun createService(){
-        newsApiService = RetrofitClientInstance().instance()!!.create(NewsApiService::class.java)
-    }
 
-    fun getNews(context: Context) {
-        var getNews = newsApiService.getNews("bitcoin")
-        var disposable = getNews.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Log.d("Retrofit", "Success")
-                processResponse(it)
-            },{
-                Log.d("Retrofit Error", "${it}")
-            })
-
-        compositeDisposable.add(disposable)
-    }
-
-    fun processResponse(response: NewsApiResponse){
-        Log.d("Retrofit", "updating adapter")
+    override fun processResponse(response: NewsApiResponse){
         adapter.updateNewsDatastore(response.articles as ArrayList<News>)
         adapter.notifyDataSetChanged()
     }
 
-    override fun onStop() {
-        super.onStop()
-        compositeDisposable.clear()
+    override fun handleError(error: Throwable) {
+        Toast.makeText(activity, "Error retriving news", Toast.LENGTH_SHORT).show()
     }
-
 }
