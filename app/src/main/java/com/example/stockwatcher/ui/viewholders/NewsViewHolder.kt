@@ -4,9 +4,12 @@ import android.util.Log
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.stockwatcher.api.models.News
+import com.example.stockwatcher.custom.RoundCornerTransformation
 import com.example.stockwatcher.databinding.NewsItemViewholderBinding
-import com.squareup.picasso.Picasso
 
 open class NewsViewHolder(binding: NewsItemViewholderBinding):RecyclerView.ViewHolder(binding.root){
 
@@ -22,10 +25,9 @@ open class NewsViewHolder(binding: NewsItemViewholderBinding):RecyclerView.ViewH
         fun loadImage(imageView: ImageView, imageUrl: String){
             imageView.layoutParams.width = 930;
             if(imageUrl!=""){
-                Picasso.get()
+                Glide.with(imageView.context)
                     .load(imageUrl)
-                    .centerCrop()
-                    .fit()
+                    .transform(MultiTransformation(CenterCrop(), RoundCornerTransformation(25f)))
                     .into(imageView)
             }
         }
