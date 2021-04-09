@@ -3,15 +3,19 @@ package com.example.stockwatcher.ui.fragments.news
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide.with
 import com.example.stockwatcher.api.models.News
 import com.example.stockwatcher.api.models.NewsSource
 import com.example.stockwatcher.data.datastore.NewsMockDatastore
 import com.example.stockwatcher.databinding.NewsItemViewholderBinding
 import com.example.stockwatcher.ui.viewholders.NewsViewHolder
+import com.squareup.picasso.Picasso
 
 class NewsAdapter: RecyclerView.Adapter<NewsViewHolder>{
     private var datastore:NewsMockDatastore = NewsMockDatastore()
+    lateinit var itemBinding: NewsItemViewholderBinding
 
     constructor(){
         datastore.addNews(News(
@@ -25,7 +29,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsViewHolder>{
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         var inflater: LayoutInflater = LayoutInflater.from(parent.context)
-        var itemBinding: NewsItemViewholderBinding = NewsItemViewholderBinding.inflate(inflater)
+        itemBinding = NewsItemViewholderBinding.inflate(inflater)
         return NewsViewHolder(itemBinding)
     }
 
@@ -35,6 +39,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsViewHolder>{
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int){
         var news = datastore.getNews(position)
+
         Log.d("News ", news.toString())
         holder.bind(news)
     }

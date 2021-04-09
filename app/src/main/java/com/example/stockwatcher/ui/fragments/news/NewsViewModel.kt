@@ -39,4 +39,8 @@ class NewsViewModel : BaseViewModel<NewsNavigator>(){
 
         compositeDisposable.add(disposable)
     }
+
+    fun getImage(){
+
+    }
 }
