@@ -1,5 +1,6 @@
 package com.example.stockwatcher.ui.viewholders
 
+import android.app.ActionBar
 import android.util.Log
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.FitCenter
 import com.example.stockwatcher.api.models.News
 import com.example.stockwatcher.custom.RoundCornerTransformation
 import com.example.stockwatcher.databinding.NewsItemViewholderBinding
@@ -22,8 +24,7 @@ open class NewsViewHolder(binding: NewsItemViewholderBinding):RecyclerView.ViewH
     companion object{
         @BindingAdapter("imageUrl")
         @JvmStatic
-        fun loadImage(imageView: ImageView, imageUrl: String){
-            imageView.layoutParams.width = 930;
+        fun loadImage(imageView: ImageView, imageUrl: String?){
             if(imageUrl!=""){
                 Glide.with(imageView.context)
                     .load(imageUrl)

@@ -29,7 +29,7 @@ class NewsAdapter: RecyclerView.Adapter<NewsViewHolder>{
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         var inflater: LayoutInflater = LayoutInflater.from(parent.context)
-        itemBinding = NewsItemViewholderBinding.inflate(inflater)
+        itemBinding = NewsItemViewholderBinding.inflate(inflater, parent, false)
         return NewsViewHolder(itemBinding)
     }
 

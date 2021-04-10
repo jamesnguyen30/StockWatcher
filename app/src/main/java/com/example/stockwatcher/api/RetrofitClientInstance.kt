@@ -15,7 +15,7 @@ class RetrofitClientInstance {
         @JvmStatic
         private var retrofit: Retrofit? = null
         private val key = "65d060beb5aa4b30be79716bc3c6dbf1"
-        private val baseUrl = "https://newsapi.org/here/is/not/"
+        private val baseUrl = "https://newsapi.org/here/"
         private val logger = HttpLoggingInterceptor()
         private val okHttpClient = OkHttpClient.Builder().addInterceptor{chain->
 

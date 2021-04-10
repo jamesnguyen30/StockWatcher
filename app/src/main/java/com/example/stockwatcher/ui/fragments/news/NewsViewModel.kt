@@ -30,7 +30,6 @@ class NewsViewModel : BaseViewModel<NewsNavigator>(){
         var disposable = getNews.subscribeOn(Schedulers.newThread()).observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     Log.d("Retrofit", "Success")
-
                     getNavigator()!!.processResponse(it)
                 },{
                     Log.d("Retrofit Error", "${it}")
