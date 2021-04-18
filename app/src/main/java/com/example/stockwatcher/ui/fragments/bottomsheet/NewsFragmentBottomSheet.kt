@@ -11,16 +11,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.stockwatcher.R
 import com.example.stockwatcher.api.models.News
 import com.example.stockwatcher.api.models.NewsApiResponse
-import com.example.stockwatcher.databinding.FragmentNewsBinding
+import com.example.stockwatcher.databinding.FragmentNewsBottomSheetBinding
 import com.example.stockwatcher.di.component.DaggerFragmentComponent
 import com.example.stockwatcher.di.component.FragmentComponent
 import com.example.stockwatcher.di.module.ViewModelModule
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import javax.inject.Inject
 
-class CustomBottomSheet : BottomSheetDialogFragment(), NewsNavigator {
+class NewsFragmentBottomSheet : BottomSheetDialogFragment(), NewsNavigator {
 
-    lateinit var binding: FragmentNewsBinding
+    lateinit var binding: FragmentNewsBottomSheetBinding
     var adapter: NewsAdapter = NewsAdapter()
 
     @Inject
@@ -30,6 +31,12 @@ class CustomBottomSheet : BottomSheetDialogFragment(), NewsNavigator {
         super.onCreate(savedInstanceState)
         buildComponent().inject(this)
         viewModel.setNavigator(this)
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.NewsFragmentBottomSheetTheme)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
     }
 
     override fun onCreateView(

@@ -15,7 +15,10 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.stockwatcher.R
 import com.example.stockwatcher.databinding.FragmentLoginBinding
+import com.example.stockwatcher.ui.activities.LoginActivity
 import com.example.stockwatcher.ui.activities.MainActivity
+import com.example.stockwatcher.ui.fragments.news.NewsFragmentBottomSheet
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
@@ -64,6 +67,7 @@ class LoginFragment: Fragment(R.layout.fragment_login), View.OnClickListener{
         navController = Navigation.findNavController(view)
         view.findViewById<Button>(R.id.register_button).setOnClickListener(this);
         view.findViewById<Button>(R.id.testButton).setOnClickListener(this);
+        view.findViewById<Button>(R.id.showDialog).setOnClickListener(this);
     }
 
     override fun onClick(v: View?) {
@@ -75,6 +79,11 @@ class LoginFragment: Fragment(R.layout.fragment_login), View.OnClickListener{
                val intent = Intent(v!!.context, MainActivity::class.java)
                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                startActivity(intent)
+           }
+           R.id.showDialog->{
+               var customBottomSheet = NewsFragmentBottomSheet()
+               (activity as? LoginActivity)?.configure(customBottomSheet)
+               activity?.supportFragmentManager?.let { customBottomSheet.show(it, "CustomBottomSheet") }
            }
        }
     }

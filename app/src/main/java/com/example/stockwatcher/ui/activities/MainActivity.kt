@@ -16,9 +16,9 @@ class MainActivity : AppCompatActivity() {
 
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
-        val bottomNavigationView = binding.bottomNavigationView
-        val navController = findNavController(R.id.main_nav_host_fragment)
+//        val bottomNavigationView = binding.bottomNavigationView
+//        val navController = findNavController(R.id.main_nav_host_fragment)
 
-        bottomNavigationView.setupWithNavController(navController)
+//        bottomNavigationView.setupWithNavController(navController)
     }
 }

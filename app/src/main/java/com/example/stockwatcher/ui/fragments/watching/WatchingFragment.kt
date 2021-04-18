@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stockwatcher.R
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class WatchingFragment : Fragment() {
+class WatchingFragment : BottomSheetDialogFragment() {
 
 //    lateinit var mockApiService: MockAPIService
 

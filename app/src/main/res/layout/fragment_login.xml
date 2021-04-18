@@ -78,5 +78,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
+        <Button
+            android:id="@+id/showDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Show Dialog"
+            app:layout_constraintEnd_toEndOf="@+id/testButton"
+            app:layout_constraintStart_toStartOf="@+id/testButton"
+            app:layout_constraintTop_toBottomOf="@+id/testButton" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

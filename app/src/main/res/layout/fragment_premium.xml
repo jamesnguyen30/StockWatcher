@@ -4,15 +4,20 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp"
-        tools:context=".ui.fragments.premium.PremiumFragment">
+        tools:context=".ui.fragments.premium.PremiumFragment"
+        >
 
         <!-- TODO: Update blank fragment layout -->
-        <ImageView
-            android:id="@+id/premiumImageView"
+<!--        <ImageView-->
+<!--            android:id="@+id/premiumImageView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@color/purple_500"-->
+<!--            />-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/running_stock_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
-
     </FrameLayout>
 </layout>

@@ -1,6 +1,7 @@
 package com.example.stockwatcher.ui.fragments.news
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,11 +18,10 @@ import com.example.stockwatcher.di.component.FragmentComponent
 import com.example.stockwatcher.di.module.ViewModelModule
 import javax.inject.Inject
 
-class NewsFragment : Fragment(R.layout.fragment_news), NewsNavigator {
+class NewsFragment : Fragment(), NewsNavigator{
 
     lateinit var binding: FragmentNewsBinding
     var adapter: NewsAdapter = NewsAdapter()
-
 
     @Inject
     lateinit var viewModel: NewsViewModel
@@ -33,10 +33,10 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsNavigator {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
-        binding =  DataBindingUtil.inflate(inflater, R.layout.fragment_news, container, false )
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_news, container, false)
 
         val recyclerView = binding.newsRecyclerView
         recyclerView.adapter = adapter
@@ -47,8 +47,7 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsNavigator {
         return binding.root
     }
 
-
-    override fun processResponse(response: NewsApiResponse){
+    override fun processResponse(response: NewsApiResponse) {
         adapter.updateNewsDatastore(response.articles as ArrayList<News>)
         adapter.notifyDataSetChanged()
     }
@@ -57,8 +56,8 @@ class NewsFragment : Fragment(R.layout.fragment_news), NewsNavigator {
         Toast.makeText(activity, "Error retriving news", Toast.LENGTH_SHORT).show()
     }
 
-    fun buildComponent(): FragmentComponent{
-         return DaggerFragmentComponent.builder()
+    fun buildComponent(): FragmentComponent {
+        return DaggerFragmentComponent.builder()
                 .viewModelModule(ViewModelModule())
                 .build()
     }
