@@ -19,7 +19,7 @@
         android:label="WatchingFragment" />
     <fragment
         android:id="@+id/premiumFragment"
-        android:name="com.example.stockwatcher.ui.fragments.premium.PremiumFragment"
+        android:name="com.example.stockwatcher.ui.fragments.runningStock.RunningStockFragment"
         android:label="fragment_premium"
-        tools:layout="@layout/fragment_premium" />
+        tools:layout="@layout/fragment_running_stock" />
 </navigation>

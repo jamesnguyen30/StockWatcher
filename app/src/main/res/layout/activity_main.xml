@@ -21,7 +21,7 @@
         <fragment
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:name="com.example.stockwatcher.ui.fragments.premium.PremiumFragment"
+            android:name="com.example.stockwatcher.ui.fragments.runningStock.RunningStockFragment"
             android:id="@+id/running_stock_fragment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

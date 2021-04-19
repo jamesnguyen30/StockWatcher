@@ -22,21 +22,21 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="APPL"
+            android:text="@{stock.name}"
             android:textSize="15sp"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="332.08"
+            app:intToStringText="@{stock.value}"
             android:textSize="15sp"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="+15.08"
+            app:intToStringText="@{stock.change}"
             android:textSize="15sp"
             />
 

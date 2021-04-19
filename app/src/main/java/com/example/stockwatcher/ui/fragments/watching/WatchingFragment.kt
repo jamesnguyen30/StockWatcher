@@ -8,17 +8,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stockwatcher.R
+import com.example.stockwatcher.databinding.FragmentWatchingBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class WatchingFragment : BottomSheetDialogFragment() {
-
 //    lateinit var mockApiService: MockAPIService
 
+    lateinit var binding: FragmentWatchingBinding;
     var recyclerView: RecyclerView? = null;
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.NewsFragmentBottomSheetTheme)
     }
 
     override fun onCreateView(
@@ -26,12 +28,10 @@ class WatchingFragment : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_watching, container, false)
-        recyclerView = view.findViewById(R.id.stock_recycler_view)
-        recyclerView!!.adapter =
-            WatchingAdapter()
-        recyclerView!!.layoutManager = LinearLayoutManager(view.context)
-        return view;
+        binding = FragmentWatchingBinding.inflate(inflater, container, false)
+        recyclerView = binding.watchingRecyclerView
+        recyclerView!!.adapter = WatchingAdapter()
+        recyclerView!!.layoutManager = LinearLayoutManager(binding.root.context)
+        return binding.root;
     }
-
 }
