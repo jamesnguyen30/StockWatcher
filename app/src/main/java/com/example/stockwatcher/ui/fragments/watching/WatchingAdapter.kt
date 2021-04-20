@@ -6,79 +6,54 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stockwatcher.data.models.RetroPhoto
 import com.example.stockwatcher.data.models.Stock
-import com.example.stockwatcher.databinding.StockItemViewholderBinding
+import com.example.stockwatcher.databinding.WatchingItemViewHolderBinding
 
-class WatchingAdapter: RecyclerView.Adapter<WatchingAdapter.StockListViewHolder> {
+class WatchingAdapter: RecyclerView.Adapter<WatchingItemViewHolder> {
 
-    var mockArray:ArrayList<Stock>
-    var dataList: List<RetroPhoto>?;
+    var mockArray:ArrayList<Stock> = ArrayList()
     var context: Context?
+
 
     constructor(){
         context = null
-        dataList = null
     }
 
 
     constructor(context: Context, dataList: List<RetroPhoto>){
-        this.dataList = dataList
         this.context = context
     }
 
     init{
         mockArray = ArrayList()
-        mockArray.add(
-            Stock(
-                "url1",
-                "Title 1",
-                "Description 1"
-            )
-        )
-        mockArray.add(
-            Stock(
-                "url2",
-                "Title 2",
-                "Description 1"
-            )
-        )
-        mockArray.add(
-            Stock(
-                "url3",
-                "Title 3",
-                "Description 1"
-            )
-        )
-        mockArray.add(
-            Stock(
-                "url4",
-                "Title 4",
-                "Description 1"
-            )
-        )
+        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
+        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
+        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
+        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
+        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
+        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
+        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
+        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
+        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
+        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
+        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
+        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
+        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
+        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
     }
 
-    class StockListViewHolder(binding: StockItemViewholderBinding): RecyclerView.ViewHolder(binding.root) {
-
-        var binding: StockItemViewholderBinding = binding
-
-        fun bind(stock: Stock){
-            binding.stock = stock
-        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StockListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchingItemViewHolder {
         var inflater:LayoutInflater = LayoutInflater.from(parent.context)
-        var itemBinding: StockItemViewholderBinding = StockItemViewholderBinding.inflate(inflater, parent, false)
-        return StockListViewHolder(
+        var itemBinding: WatchingItemViewHolderBinding = WatchingItemViewHolderBinding.inflate(inflater, parent, false)
+        return WatchingItemViewHolder(
             itemBinding
         )
     }
 
     override fun getItemCount(): Int {
-        return 3;
+        return mockArray.size;
     }
 
-    override fun onBindViewHolder(holder: StockListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: WatchingItemViewHolder, position: Int) {
         var stock = mockArray.get(position)
         holder.bind(stock)
     }

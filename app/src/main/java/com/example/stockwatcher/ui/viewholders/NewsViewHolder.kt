@@ -17,7 +17,6 @@ open class NewsViewHolder(binding: NewsItemViewholderBinding):RecyclerView.ViewH
 
     var binding: NewsItemViewholderBinding = binding
     fun bind(news: News){
-        Log.d("viewholder", news.toString())
         binding.news = news
     }
 

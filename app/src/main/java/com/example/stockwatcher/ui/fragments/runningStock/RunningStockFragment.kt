@@ -1,6 +1,7 @@
 package com.example.stockwatcher.ui.fragments.runningStock
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -9,10 +10,10 @@ import com.example.stockwatcher.custom.runningStock.RunningStockLayoutManager
 import com.example.stockwatcher.databinding.FragmentRunningStockBinding
 import com.example.stockwatcher.ui.fragments.watching.WatchingFragment
 
-class RunningStockFragment : Fragment(), View.OnClickListener{
+class RunningStockFragment : Fragment(){
 
     lateinit var binding:FragmentRunningStockBinding;
-    var adapter: RunningStockAdapter = RunningStockAdapter(View.OnClickListener { startWatchingFragment() })
+    var adapter: RunningStockAdapter = RunningStockAdapter()
     lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,21 +31,26 @@ class RunningStockFragment : Fragment(), View.OnClickListener{
         recyclerView.layoutManager = RunningStockLayoutManager(binding.root.context)
 
         recyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+            var timeDragging:Long = 0;
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 when(newState){
                     RecyclerView.SCROLL_STATE_IDLE -> recyclerView.smoothScrollToPosition(adapter.itemCount)
-                    RecyclerView.SCROLL_STATE_SETTLING -> recyclerView.smoothScrollToPosition(adapter.itemCount)
+                    RecyclerView.SCROLL_STATE_DRAGGING -> {
+                        timeDragging = System.currentTimeMillis()
+
+                    }
+                    RecyclerView.SCROLL_STATE_SETTLING -> {
+                        if(System.currentTimeMillis() - timeDragging < 100){
+                           startWatchingFragment()
+                        } else {
+                            recyclerView.smoothScrollToPosition(adapter.itemCount)
+                        }
+                    }
                 }
             }
         })
 
-        binding.testButton.setOnClickListener(this)
-
         return binding.root
-    }
-
-    override fun onStart() {
-        super.onStart()
     }
 
     override fun onResume() {
@@ -54,25 +60,11 @@ class RunningStockFragment : Fragment(), View.OnClickListener{
 
     }
 
-    override fun onStop() {
-        super.onStop()
-    }
-
     private fun startWatchingFragment(){
         //Bring up BottomSheetView
         var watchingFragment = WatchingFragment()
         activity?.supportFragmentManager?.let{
             watchingFragment.show(it, "WatchingFragment")
-        }
-    }
-
-    override fun onClick(p0: View?) {
-        when(p0!!.id){
-            R.id.running_stock_recycler_view -> {
-            }
-            R.id.testButton->{
-                startWatchingFragment()
-            }
         }
     }
 }

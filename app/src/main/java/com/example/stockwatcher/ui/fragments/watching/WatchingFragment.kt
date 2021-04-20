@@ -12,7 +12,6 @@ import com.example.stockwatcher.databinding.FragmentWatchingBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class WatchingFragment : BottomSheetDialogFragment() {
-//    lateinit var mockApiService: MockAPIService
 
     lateinit var binding: FragmentWatchingBinding;
     var recyclerView: RecyclerView? = null;
@@ -20,7 +19,7 @@ class WatchingFragment : BottomSheetDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.NewsFragmentBottomSheetTheme)
+        setStyle(STYLE_NORMAL, R.style.NewsFragmentBottomSheetTheme)
     }
 
     override fun onCreateView(

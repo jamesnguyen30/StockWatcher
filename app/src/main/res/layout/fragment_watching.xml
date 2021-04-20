@@ -22,6 +22,18 @@
             app:layout_constraintTop_toTopOf="parent"
             />
 
+        <Button
+            android:id="@+id/add_stock_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Edit"
+            app:layout_constraintBottom_toTopOf="@+id/watching_recycler_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/watching_recycler_view"
             android:layout_width="match_parent"
@@ -31,6 +43,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

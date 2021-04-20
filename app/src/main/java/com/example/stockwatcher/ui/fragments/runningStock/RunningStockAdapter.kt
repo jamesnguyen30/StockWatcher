@@ -1,5 +1,6 @@
 package com.example.stockwatcher.ui.fragments.runningStock
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.stockwatcher.api.models.MinimizedStock
 import com.example.stockwatcher.databinding.RunningStockViewHolderBinding
 
-class RunningStockAdapter(var itemClickListener: View.OnClickListener): RecyclerView.Adapter<RunningStockViewHolder>(){
+class RunningStockAdapter(): RecyclerView.Adapter<RunningStockViewHolder>(){
 
     lateinit var itemBinding: RunningStockViewHolderBinding;
     private var dataStore: ArrayList<MinimizedStock> = ArrayList();
@@ -39,7 +40,7 @@ class RunningStockAdapter(var itemClickListener: View.OnClickListener): Recycler
         var inflater = LayoutInflater.from(parent.context)
         itemBinding = RunningStockViewHolderBinding.inflate(inflater, parent, false)
 
-        return RunningStockViewHolder(itemBinding, itemClickListener);
+        return RunningStockViewHolder(itemBinding, { Log.d("here", "here")});
     }
 
     override fun getItemCount(): Int {

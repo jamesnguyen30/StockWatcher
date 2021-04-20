@@ -7,13 +7,6 @@
         tools:context=".ui.fragments.runningStock.RunningStockFragment"
         >
 
-        <Button
-            android:id="@+id/testButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CLick"
-            />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/running_stock_recycler_view"
             android:layout_width="match_parent"
