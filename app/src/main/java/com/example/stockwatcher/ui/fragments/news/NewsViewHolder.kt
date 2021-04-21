@@ -1,4 +1,4 @@
-package com.example.stockwatcher.ui.viewholders
+package com.example.stockwatcher.ui.fragments.news
 
 import android.app.ActionBar
 import android.util.Log

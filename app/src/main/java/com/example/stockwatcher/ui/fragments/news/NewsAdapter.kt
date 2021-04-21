@@ -3,15 +3,11 @@ package com.example.stockwatcher.ui.fragments.news
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide.with
 import com.example.stockwatcher.api.models.News
 import com.example.stockwatcher.api.models.NewsSource
 import com.example.stockwatcher.data.datastore.NewsMockDatastore
 import com.example.stockwatcher.databinding.NewsItemViewholderBinding
-import com.example.stockwatcher.ui.viewholders.NewsViewHolder
-import com.squareup.picasso.Picasso
 
 class NewsAdapter: RecyclerView.Adapter<NewsViewHolder>{
     private var datastore:NewsMockDatastore = NewsMockDatastore()

@@ -7,14 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.stockwatcher.api.models.MinimizedStock
 import com.example.stockwatcher.databinding.RunningStockViewHolderBinding
 
-class RunningStockViewHolder(private var binding: RunningStockViewHolderBinding, private var onClickHandler: ()->Unit): RecyclerView.ViewHolder(binding.root) {
-
-
-    init{
-        itemView.setOnClickListener{
-            onClickHandler()
-        }
-    }
+class RunningStockViewHolder(private var binding: RunningStockViewHolderBinding): RecyclerView.ViewHolder(binding.root) {
 
     fun bind(stock: MinimizedStock) {
         binding.stock = stock;

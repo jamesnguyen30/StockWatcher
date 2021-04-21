@@ -7,19 +7,19 @@
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.example.stockwatcher.ui.fragments.news.NewsFragment"
-        android:label="fragment_saved_news"
-        tools:layout="@layout/fragment_saved_news" />
+        android:label="NewsFragment" >
+        <action
+            android:id="@+id/action_newsFragment_to_searchStockFragment"
+            app:destination="@id/searchStockFragment"
+            />
+    </fragment>
     <fragment
-        android:id="@+id/savedNewsFragment"
-        android:name="com.example.stockwatcher.ui.fragments.savednews.SavedNewsFragment"
-        android:label="SavedNewsFragment" />
-    <fragment
-        android:id="@+id/watchingFragment"
-        android:name="com.example.stockwatcher.ui.fragments.watching.WatchingFragment"
-        android:label="WatchingFragment" />
-    <fragment
-        android:id="@+id/premiumFragment"
-        android:name="com.example.stockwatcher.ui.fragments.runningStock.RunningStockFragment"
-        android:label="fragment_premium"
-        tools:layout="@layout/fragment_running_stock" />
+        android:id="@+id/searchStockFragment"
+        android:name="com.example.stockwatcher.ui.fragments.searchStock.SearchStockFragment"
+        android:label="SearchStockFragment" >
+        <action
+            android:id="@+id/action_searchStockFragment_pop"
+            app:popUpTo="@id/searchStockFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

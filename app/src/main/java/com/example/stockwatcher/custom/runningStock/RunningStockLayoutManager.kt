@@ -28,10 +28,6 @@ class RunningStockLayoutManager : LinearLayoutManager {
             return SNAP_TO_START
         }
 
-//        override fun computeScrollVectorForPosition(targetPosition: Int): PointF? {
-//            return super.computeScrollVectorForPosition(targetPosition)
-//        }
-
         override fun calculateSpeedPerPixel(displayMetrics: DisplayMetrics?): Float {
             return super.calculateSpeedPerPixel(displayMetrics) * 100f;
         }

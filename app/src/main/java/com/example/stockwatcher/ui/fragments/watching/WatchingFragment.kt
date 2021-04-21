@@ -11,7 +11,7 @@ import com.example.stockwatcher.R
 import com.example.stockwatcher.databinding.FragmentWatchingBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class WatchingFragment : BottomSheetDialogFragment() {
+class WatchingFragment : BottomSheetDialogFragment(), View.OnClickListener {
 
     lateinit var binding: FragmentWatchingBinding;
     var recyclerView: RecyclerView? = null;
@@ -31,6 +31,18 @@ class WatchingFragment : BottomSheetDialogFragment() {
         recyclerView = binding.watchingRecyclerView
         recyclerView!!.adapter = WatchingAdapter()
         recyclerView!!.layoutManager = LinearLayoutManager(binding.root.context)
+
+//        binding.addStockButton.setOnClickListener(this)
+
         return binding.root;
+    }
+
+    override fun onClick(p0: View?) {
+        when(p0!!.id){
+//            R.id.add_stock_button -> {
+//               //TODO: Add stock button
+//
+//            }
+        }
     }
 }

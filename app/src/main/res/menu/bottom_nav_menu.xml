@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:title="News"
-        android:id="@+id/newsFragment"
+        android:id="@+id/newsItem"
         android:icon="@drawable/ic_news"
         />
     <item
-        android:id="@+id/premiumFragment"
-        android:title="Premium"
-        android:icon="@drawable/ic_premium"
+        android:id="@+id/searchItem"
+        android:title="Search"
+        android:icon="@drawable/ic_round_search_24"
         />
     <item
-        android:id="@+id/savedNewsFragment"
-        android:title="Saved News"
-        android:icon="@drawable/ic_bookmark"
-        />
-    <item
-        android:id="@+id/watchingFragment"
-        android:title="Watching"
+        android:id="@+id/watchItem"
+        android:title="Watch List"
         android:icon="@drawable/ic_watch"
+        />
+    <item
+        android:id="@+id/headlineItem"
+        android:title="Head Line"
+        android:icon="@drawable/ic_premium"
         />
 </menu>

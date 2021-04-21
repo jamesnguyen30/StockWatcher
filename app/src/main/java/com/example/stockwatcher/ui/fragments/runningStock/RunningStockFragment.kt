@@ -1,13 +1,12 @@
 package com.example.stockwatcher.ui.fragments.runningStock
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.example.stockwatcher.R
 import com.example.stockwatcher.custom.runningStock.RunningStockLayoutManager
 import com.example.stockwatcher.databinding.FragmentRunningStockBinding
+import com.example.stockwatcher.ui.activities.MainActivity
 import com.example.stockwatcher.ui.fragments.watching.WatchingFragment
 
 class RunningStockFragment : Fragment(){
@@ -41,7 +40,7 @@ class RunningStockFragment : Fragment(){
                     }
                     RecyclerView.SCROLL_STATE_SETTLING -> {
                         if(System.currentTimeMillis() - timeDragging < 100){
-                           startWatchingFragment()
+                            (activity as? MainActivity)?.startWatchingFragment()
                         } else {
                             recyclerView.smoothScrollToPosition(adapter.itemCount)
                         }
@@ -60,11 +59,11 @@ class RunningStockFragment : Fragment(){
 
     }
 
-    private fun startWatchingFragment(){
-        //Bring up BottomSheetView
-        var watchingFragment = WatchingFragment()
-        activity?.supportFragmentManager?.let{
-            watchingFragment.show(it, "WatchingFragment")
-        }
-    }
+//    private fun startWatchingFragment(){
+//        //Bring up BottomSheetView
+//        var watchingFragment = WatchingFragment()
+//        activity?.supportFragmentManager?.let{
+//            watchingFragment.show(it, "WatchingFragment")
+//        }
+//    }
 }
