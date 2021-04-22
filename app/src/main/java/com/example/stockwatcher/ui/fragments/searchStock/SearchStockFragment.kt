@@ -1,19 +1,26 @@
 package com.example.stockwatcher.ui.fragments.searchStock
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.widget.addTextChangedListener
 import com.example.stockwatcher.R
+import com.example.stockwatcher.api.models.LookupApiResponse
 import com.example.stockwatcher.databinding.FragmentSearchStockBinding
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.android.material.textfield.TextInputEditText
 
-class SearchStockFragment : Fragment(), SearchStockNavigator, View.OnClickListener{
+class SearchStockFragment : Fragment(), SearchStockNavigator{
 
     lateinit var binding: FragmentSearchStockBinding
-    lateinit var searchTextInput: TextInputEditText
+    var searchTextInput: TextInputEditText? = null
+    var loadingIndicator: LinearProgressIndicator? = null
 
     var viewModel: SearchStockViewModel = SearchStockViewModel()
 
@@ -22,11 +29,23 @@ class SearchStockFragment : Fragment(), SearchStockNavigator, View.OnClickListen
 
         binding = FragmentSearchStockBinding.inflate(inflater, container, false)
 
-        var testButton = binding.testButton
-        testButton.setOnClickListener(this)
-
-        viewModel.setNavigator(this)
+        viewModel.init(this)
         searchTextInput = binding.searchTextInputAutocomplete
+
+        loadingIndicator = binding.tickerAutocompleteLoadIndicator
+
+        searchTextInput!!.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(p0: Editable?) {
+                showLoadingIndicator()
+                viewModel.lookupTicker(p0.toString())
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
 
         var data = ArrayList<String>()
 
@@ -42,28 +61,26 @@ class SearchStockFragment : Fragment(), SearchStockNavigator, View.OnClickListen
         return binding.root
     }
 
-    override fun processSearchResults() {
-        //TODO: implement
+    override fun processSearchResults(suggestedTickers: List<LookupApiResponse>) {
+        Log.d("Fragment", suggestedTickers.toString())
+
+        hideLoadingIndicator()
     }
 
-    override fun loadingRequest() {
-        TODO("Not yet implemented")
+    override fun showLoadingIndicator() {
+        if(loadingIndicator!!.visibility !=View.VISIBLE){
+            loadingIndicator!!.visibility = View.VISIBLE
+        }
     }
 
-    override fun stopLoadingRequest() {
-        TODO("Not yet implemented")
+    override fun hideLoadingIndicator() {
+        if(loadingIndicator!!.visibility !=View.INVISIBLE){
+            loadingIndicator!!.visibility = View.INVISIBLE
+        }
     }
 
     override fun requestError() {
-        TODO("Not yet implemented")
+        //TODO: Display error
     }
 
-    override fun onClick(p0: View?) {
-        when(p0!!.id){
-            R.id.testButton ->{
-               //TODO: Implement when text is entered
-                viewModel.lookupTicker(searchTextInput.text.toString())
-            }
-        }
-    }
 }

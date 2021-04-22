@@ -2,6 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.StockWatcher" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
+<!--        <item name="colorPrimary">@color/white</item>-->
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryVariant">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
@@ -14,6 +15,11 @@
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="App.LinearProgressIndicator" parent="">
+        <item name="colorPrimary">@color/purple_500</item>
+
     </style>
     
     <style name="NewsFragmentBottomSheetTheme" parent="Theme.Design.BottomSheetDialog">

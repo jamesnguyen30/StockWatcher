@@ -51,7 +51,7 @@ class RetrofitClientInstance {
 
     fun instanceTickerLookup(): Retrofit?{
         val logger = HttpLoggingInterceptor()
-        val okHttpClient = constructOkClientBuilder(mapOf("apikey" to "demo"))
+        val okHttpClient = constructOkClientBuilder(mapOf("apikey" to TICKER_LOOKUP_API_KEY))
         if(retrofitTickerLookup==null) {
 
             logger.level = HttpLoggingInterceptor.Level.HEADERS

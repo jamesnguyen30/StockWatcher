@@ -1,36 +1,41 @@
 package com.example.stockwatcher.ui.fragments.searchStock
 
-import android.util.Log
 import com.example.stockwatcher.api.RetrofitClientInstance
 import com.example.stockwatcher.api.services.TickerLookupApiService
 import com.example.stockwatcher.ui.base.BaseViewModel
+import com.jakewharton.rxrelay3.PublishRelay
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
 class SearchStockViewModel: BaseViewModel<SearchStockNavigator>() {
 
     lateinit var lookupApiService: TickerLookupApiService
+    private val tickerAutoCompletePublishSubject =  PublishRelay.create<String>()
 
-    init {
-        start()
+    fun init(navigator: SearchStockNavigator){
+        lookupApiService = RetrofitClientInstance().instanceTickerLookup()!!.create(TickerLookupApiService::class.java)
+        setNavigator(navigator)
+        configureAutoCompletePublishRelay()
     }
 
-    private fun start(){
-       lookupApiService = RetrofitClientInstance().instanceTickerLookup()!!.create(TickerLookupApiService::class.java)
-    }
-
-    fun lookupTicker(searchTerm: String){
-        var observable = lookupApiService.lookupTicker(searchTerm, "10")
-
-        var disposable = observable
-                .subscribeOn(Schedulers.newThread())
+    private fun configureAutoCompletePublishRelay(){
+        tickerAutoCompletePublishSubject
+                .debounce(300, TimeUnit.MILLISECONDS)
+                .distinctUntilChanged()
+                .switchMap {
+                    lookupApiService.lookupTicker(it, "10")
+                }
+            .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    Log.d("SearchStockViewModel", it.toString())
+                    getNavigator()!!.processSearchResults(it)
                 }, {
-                    Log.d("SearchStockViewModel", it.toString())
+                    getNavigator()!!.requestError()
                 })
+    }
 
-        addToDisposable(disposable)
+    fun lookupTicker(query: String){
+        tickerAutoCompletePublishSubject.accept(query.trim())
     }
 }
