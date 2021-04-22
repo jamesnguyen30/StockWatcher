@@ -10,7 +10,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 
 
 class NewsViewModel : BaseViewModel<NewsNavigator>(){
-    var compositeDisposable: CompositeDisposable = CompositeDisposable()
     lateinit var newsApiService: NewsApiService
 
     init{
@@ -36,6 +35,6 @@ class NewsViewModel : BaseViewModel<NewsNavigator>(){
                     getNavigator()!!.handleError(it)
                 })
 
-        compositeDisposable.add(disposable)
+        addToDisposable(disposable)
     }
 }
