@@ -16,6 +16,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/ic_round_search_24"
+            android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/searchTextInputAutocomplete"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/searchTextInputAutocomplete" />
@@ -24,9 +25,9 @@
             android:id="@+id/searchTextInputAutocomplete"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="AAP"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="10dp"
+            android:hint="APPL"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/searchIcon"
             app:layout_constraintTop_toTopOf="parent"

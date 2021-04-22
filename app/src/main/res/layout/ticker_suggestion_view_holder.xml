@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <data>
+       <variable
+           name="ticker"
+           type="com.example.stockwatcher.api.models.TickerApiResponse" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            android:id="@+id/tickerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="20dp"
+            android:paddingBottom="20dp"
+            android:text="@{ticker.symbol}"
+            android:gravity="left"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/companyNameTextView"
+            />
+
+        <TextView
+            android:id="@+id/companyNameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:ellipsize="marquee"
+            android:text="@{ticker.name}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="@+id/tickerTextView"
+            app:layout_constraintTop_toBottomOf="@+id/tickerTextView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{ticker.exchangeShortName}"
+            app:layout_constraintBottom_toBottomOf="@+id/tickerTextView"
+            app:layout_constraintStart_toEndOf="@+id/tickerTextView"
+            app:layout_constraintTop_toTopOf="@+id/tickerTextView" />
+
+        <TextView
+            android:id="@+id/valueTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="330.02"
+            android:textAlignment="textEnd"
+            android:textSize="22sp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tickerTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tickerTextView" />
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="+ 0.44"
+            android:textAlignment="textEnd"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@id/valueTextView"
+            app:layout_constraintStart_toStartOf="@+id/valueTextView"
+            app:layout_constraintTop_toBottomOf="@+id/valueTextView" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tickerTextView"
+            app:layout_constraintEnd_toEndOf="@id/valueTextView"
+            />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

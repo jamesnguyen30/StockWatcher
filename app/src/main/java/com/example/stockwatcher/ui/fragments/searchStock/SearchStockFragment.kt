@@ -8,10 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import androidx.core.widget.addTextChangedListener
-import com.example.stockwatcher.R
-import com.example.stockwatcher.api.models.LookupApiResponse
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.stockwatcher.api.models.TickerApiResponse
 import com.example.stockwatcher.databinding.FragmentSearchStockBinding
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.android.material.textfield.TextInputEditText
@@ -21,6 +19,7 @@ class SearchStockFragment : Fragment(), SearchStockNavigator{
     lateinit var binding: FragmentSearchStockBinding
     var searchTextInput: TextInputEditText? = null
     var loadingIndicator: LinearProgressIndicator? = null
+    var recyclerViewAdapter: SearchStockAdapter? = null
 
     var viewModel: SearchStockViewModel = SearchStockViewModel()
 
@@ -47,24 +46,18 @@ class SearchStockFragment : Fragment(), SearchStockNavigator{
             }
         })
 
-        var data = ArrayList<String>()
-
-        data.add("ABC")
-        data.add("DEF")
-        data.add("HIJ")
-        data.add("KLM")
-        data.add("MNO")
-        data.add("PQR")
-        data.add("STU")
-        data.add("VXYZ")
+        recyclerViewAdapter = SearchStockAdapter(binding.root.context)
+        val recyclerView = binding.searchResultsRecyclerView
+        recyclerView.adapter = recyclerViewAdapter
+        recyclerView.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, false)
 
         return binding.root
     }
 
-    override fun processSearchResults(suggestedTickers: List<LookupApiResponse>) {
+    override fun processSearchResults(suggestedTickers: List<TickerApiResponse>) {
         Log.d("Fragment", suggestedTickers.toString())
-
         hideLoadingIndicator()
+        recyclerViewAdapter!!.updateDataStore(suggestedTickers)
     }
 
     override fun showLoadingIndicator() {
