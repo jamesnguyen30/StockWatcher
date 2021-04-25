@@ -11,14 +11,5 @@ class RunningStockViewHolder(private var binding: RunningStockViewHolderBinding)
 
     fun bind(stock: MinimizedStock) {
         binding.stock = stock;
-
-    }
-
-    companion object {
-        @BindingAdapter("intToStringText")
-        @JvmStatic
-        fun loadIntToString(textView: TextView, intValue: Int) {
-            textView.text = intValue.toString()
-        }
     }
 }

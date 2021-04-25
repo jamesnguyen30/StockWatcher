@@ -20,13 +20,17 @@ class RetrofitClientInstance {
         private val key = "65d060beb5aa4b30be79716bc3c6dbf1"
         private val baseUrl = "https://newsapi.org/here/"
 
-        //SAMPLE API CALL: https://financialmodelingprep.com/api/v3/search?query=aa&limit=10&apikey=demo
+        //IEX
+        private val IEX_SANDBOX_BASE_URL = "https://sandbox.iexapis.com"
+        private val IEX_SANBOX_TOKEN = "Tpk_4083caf83bde4e94b709e982d5c97da1"
+        const val IEX_VERSION = "stable/"
+
         //query=aa : aa is the search term
         //apiKey is demo
-        const val TICKER_LOOKUP_BASE_URL = "https://financialmodelingprep.com"
-        const val TICKER_LOOKUP_VERSION = "api/v3/"
-        const val TICKER_LOOKUP_API_KEY= "demo"
-        const val TICKER_LOOKUP_DEFAULT_LIMIT = "10"
+//        const val TICKER_LOOKUP_BASE_URL = "https://financialmodelingprep.com"
+//        const val TICKER_LOOKUP_VERSION = "api/v3/"
+//        const val TICKER_LOOKUP_API_KEY= "demo"
+//        const val TICKER_LOOKUP_DEFAULT_LIMIT = "10"
     }
 
     fun instance():Retrofit?{
@@ -49,9 +53,9 @@ class RetrofitClientInstance {
         return retrofit
     }
 
-    fun instanceTickerLookup(): Retrofit?{
+    fun instanceRetrofitIEX(): Retrofit?{
         val logger = HttpLoggingInterceptor()
-        val okHttpClient = constructOkClientBuilder(mapOf("apikey" to TICKER_LOOKUP_API_KEY))
+        val okHttpClient = constructOkClientBuilder(mapOf("token" to IEX_SANBOX_TOKEN))
         if(retrofitTickerLookup==null) {
 
             logger.level = HttpLoggingInterceptor.Level.HEADERS
@@ -60,7 +64,7 @@ class RetrofitClientInstance {
             client.connectTimeout(30, TimeUnit.SECONDS)
 
             retrofitTickerLookup = Retrofit.Builder()
-                    .baseUrl(TICKER_LOOKUP_BASE_URL)
+                    .baseUrl(IEX_SANDBOX_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                     .client(client.build())

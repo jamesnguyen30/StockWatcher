@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.stockwatcher.api.models.TickerApiResponse
+import com.example.stockwatcher.api.models.IEXSearchApiResponse
 import com.example.stockwatcher.databinding.FragmentSearchStockBinding
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.android.material.textfield.TextInputEditText
@@ -54,10 +54,10 @@ class SearchStockFragment : Fragment(), SearchStockNavigator{
         return binding.root
     }
 
-    override fun processSearchResults(suggestedTickers: List<TickerApiResponse>) {
-        Log.d("Fragment", suggestedTickers.toString())
+    override fun processSearchResults(suggestedIEXSearches: List<IEXSearchApiResponse>) {
+        Log.d("Fragment", suggestedIEXSearches.toString())
         hideLoadingIndicator()
-        recyclerViewAdapter!!.updateDataStore(suggestedTickers)
+        recyclerViewAdapter!!.updateDataStore(suggestedIEXSearches)
     }
 
     override fun showLoadingIndicator() {

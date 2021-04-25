@@ -1,14 +1,12 @@
 package com.example.stockwatcher.ui.fragments.watching
 
-import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stockwatcher.data.models.Stock
-import com.example.stockwatcher.databinding.WatchingItemViewHolderBinding
+import com.example.stockwatcher.databinding.TickerItemViewHolderBinding
 
-class WatchingItemViewHolder( var binding: WatchingItemViewHolderBinding): RecyclerView.ViewHolder(binding.root){
+class WatchingItemViewHolder( var binding: TickerItemViewHolderBinding): RecyclerView.ViewHolder(binding.root){
 
     fun bind(stock: Stock){
        binding.stock = stock
     }
-
 }

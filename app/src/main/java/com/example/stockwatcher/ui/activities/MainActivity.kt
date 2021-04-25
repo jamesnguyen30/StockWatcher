@@ -1,6 +1,7 @@
 package com.example.stockwatcher.ui.activities
 
 import android.app.Activity
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -17,7 +18,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
-   lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
+    private var watchList: ArrayList<String>? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +57,8 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        loadSavedWatchList()
     }
 
     fun startWatchingFragment(){
@@ -63,6 +67,46 @@ class MainActivity : AppCompatActivity() {
         this.supportFragmentManager.let{
             watchingFragment.show(it, "WatchingFragment")
         }
+    }
+
+    private fun loadSavedWatchList(){
+        val sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?:return
+        with(sharedPref){
+            val key = resources.getString(R.string.saved_watch_list_shared_preference_key)
+            val savedWatchList = getStringSet(key, null) ?: HashSet<String>()
+
+            if(savedWatchList.isEmpty()){
+                savedWatchList.add("AAPL")
+                savedWatchList.add("AMZN")
+                savedWatchList.add("TSLA")
+                savedWatchList.add("DJI")
+                savedWatchList.add("IXIC")
+                savedWatchList.add("GM")
+                savedWatchList.add("DIS")
+
+                with(sharedPref.edit()){
+                    putStringSet(key, savedWatchList)
+                    apply()
+                }
+            }
+
+            watchList = ArrayList(savedWatchList)
+        }
+    }
+
+    fun getWatchList():ArrayList<String>? {
+        return watchList
+    }
+
+    fun addToWatchList(ticker: String): Boolean{
+        val sharedPrefs = this.getPreferences(Context.MODE_PRIVATE) ?: return false
+        val key = resources.getString(R.string.saved_watch_list_shared_preference_key)
+        with(sharedPrefs.edit()){
+
+            putStringSet(key, HashSet<String>(watchList))
+            apply()
+        }
+        return true
     }
 
     fun enableRunningFragment(isEnabled: Boolean){

@@ -1,11 +1,8 @@
 package com.example.stockwatcher.ui.fragments.searchStock
 
-import com.example.stockwatcher.api.models.TickerApiResponse
+import com.example.stockwatcher.api.models.IEXSearchApiResponse
+import com.example.stockwatcher.ui.base.BaseNavigator
 
-interface SearchStockNavigator {
-
-    fun processSearchResults(suggestedTickers: List<TickerApiResponse>)
-    fun showLoadingIndicator()
-    fun hideLoadingIndicator()
-    fun requestError()
+interface SearchStockNavigator: BaseNavigator {
+    fun processSearchResults(suggestedIEXSearches: List<IEXSearchApiResponse>)
 }

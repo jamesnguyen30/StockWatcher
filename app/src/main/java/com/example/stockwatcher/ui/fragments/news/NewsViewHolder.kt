@@ -19,17 +19,4 @@ open class NewsViewHolder(binding: NewsItemViewholderBinding):RecyclerView.ViewH
     fun bind(news: News){
         binding.news = news
     }
-
-    companion object{
-        @BindingAdapter("imageUrl")
-        @JvmStatic
-        fun loadImage(imageView: ImageView, imageUrl: String?){
-            if(imageUrl!=""){
-                Glide.with(imageView.context)
-                    .load(imageUrl)
-                    .transform(MultiTransformation(CenterCrop(), RoundCornerTransformation(25f)))
-                    .into(imageView)
-            }
-        }
-    }
 }

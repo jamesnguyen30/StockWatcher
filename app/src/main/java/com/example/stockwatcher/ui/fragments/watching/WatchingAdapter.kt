@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stockwatcher.data.models.RetroPhoto
 import com.example.stockwatcher.data.models.Stock
-import com.example.stockwatcher.databinding.WatchingItemViewHolderBinding
+import com.example.stockwatcher.databinding.TickerItemViewHolderBinding
 
 class WatchingAdapter: RecyclerView.Adapter<WatchingItemViewHolder> {
 
@@ -43,7 +43,7 @@ class WatchingAdapter: RecyclerView.Adapter<WatchingItemViewHolder> {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchingItemViewHolder {
         var inflater:LayoutInflater = LayoutInflater.from(parent.context)
-        var itemBinding: WatchingItemViewHolderBinding = WatchingItemViewHolderBinding.inflate(inflater, parent, false)
+        var itemBinding = TickerItemViewHolderBinding.inflate(inflater, parent, false)
         return WatchingItemViewHolder(
             itemBinding
         )
@@ -57,6 +57,5 @@ class WatchingAdapter: RecyclerView.Adapter<WatchingItemViewHolder> {
         var stock = mockArray.get(position)
         holder.bind(stock)
     }
-
 
 }
