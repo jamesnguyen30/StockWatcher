@@ -8,7 +8,7 @@
     <data>
        <variable
            name="ticker"
-           type="com.example.stockwatcher.api.models.IEXSearchApiResponse" />
+           type="com.example.stockwatcher.api.models.SearchSymbol" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:ellipsize="marquee"
-            android:text="@{ticker.securityName}"
+            android:text="@{ticker.instrumentName}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textView"
             app:layout_constraintStart_toStartOf="@+id/tickerTextView"

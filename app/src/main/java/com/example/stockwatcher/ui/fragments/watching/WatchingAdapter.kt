@@ -4,13 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.stockwatcher.api.models.SearchSymbol
 import com.example.stockwatcher.data.models.RetroPhoto
 import com.example.stockwatcher.data.models.Stock
 import com.example.stockwatcher.databinding.TickerItemViewHolderBinding
 
-class WatchingAdapter: RecyclerView.Adapter<WatchingItemViewHolder> {
+class WatchingAdapter: RecyclerView.Adapter<TickerItemViewHolder> {
 
-    var mockArray:ArrayList<Stock> = ArrayList()
+    var mockArray:ArrayList<SearchSymbol> = ArrayList()
     var context: Context?
 
 
@@ -18,33 +19,47 @@ class WatchingAdapter: RecyclerView.Adapter<WatchingItemViewHolder> {
         context = null
     }
 
-
-    constructor(context: Context, dataList: List<RetroPhoto>){
-        this.context = context
-    }
-
     init{
         mockArray = ArrayList()
-        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
-        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
-        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
-        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
-        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
-        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
-        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
-        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
-        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
-        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
-        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
-        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
-        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
-        mockArray.add(Stock("APPL", "Apple.Inc", 342.04f, 0.2f))
+        mockArray.add(SearchSymbol("AAPL", "Apple.Inc", "NYSE",
+                "UTC06","Common Stock", "United States",
+                "USD"))
+        mockArray.add(SearchSymbol("AAPL", "Apple.Inc", "NYSE",
+                "UTC06","Common Stock", "United States",
+                "USD"))
+        mockArray.add(SearchSymbol("AAPL", "Apple.Inc", "NYSE",
+                "UTC06","Common Stock", "United States",
+                "USD"))
+        mockArray.add(SearchSymbol("AAPL", "Apple.Inc", "NYSE",
+                "UTC06","Common Stock", "United States",
+                "USD"))
+        mockArray.add(SearchSymbol("AAPL", "Apple.Inc", "NYSE",
+                "UTC06","Common Stock", "United States",
+                "USD"))
+        mockArray.add(SearchSymbol("AAPL", "Apple.Inc", "NYSE",
+                "UTC06","Common Stock", "United States",
+                "USD"))
+        mockArray.add(SearchSymbol("AAPL", "Apple.Inc", "NYSE",
+                "UTC06","Common Stock", "United States",
+                "USD"))
+        mockArray.add(SearchSymbol("AAPL", "Apple.Inc", "NYSE",
+                "UTC06","Common Stock", "United States",
+                "USD"))
+        mockArray.add(SearchSymbol("AAPL", "Apple.Inc", "NYSE",
+                "UTC06","Common Stock", "United States",
+                "USD"))
+        mockArray.add(SearchSymbol("AAPL", "Apple.Inc", "NYSE",
+                "UTC06","Common Stock", "United States",
+                "USD"))
+        mockArray.add(SearchSymbol("AAPL", "Apple.Inc", "NYSE",
+                "UTC06","Common Stock", "United States",
+                "USD"))
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WatchingItemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TickerItemViewHolder {
         var inflater:LayoutInflater = LayoutInflater.from(parent.context)
         var itemBinding = TickerItemViewHolderBinding.inflate(inflater, parent, false)
-        return WatchingItemViewHolder(
+        return TickerItemViewHolder(
             itemBinding
         )
     }
@@ -53,7 +68,7 @@ class WatchingAdapter: RecyclerView.Adapter<WatchingItemViewHolder> {
         return mockArray.size;
     }
 
-    override fun onBindViewHolder(holder: WatchingItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TickerItemViewHolder, position: Int) {
         var stock = mockArray.get(position)
         holder.bind(stock)
     }

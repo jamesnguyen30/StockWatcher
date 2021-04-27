@@ -1,8 +1,13 @@
 package com.example.stockwatcher.data.models
 
-data class Stock constructor(
-        var tickerSymbol: String,
-        var fullName: String,
-        var value: Float,
+data class Stock(
+        var ticker: String,
+        var instrumentName: String,
+        var exchangeTimeZone: String,
+        var exchange: String,
+        var currency: String,
+        var country: String,
+
         var change: Float
 )
+

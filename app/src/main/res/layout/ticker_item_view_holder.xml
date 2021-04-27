@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
+<layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
     <data>
         <variable
-            name="stock"
-            type="com.example.stockwatcher.data.models.Stock" />
+            name="searchSymbol"
+            type="com.example.stockwatcher.api.models.SearchSymbol" />
+        
+        <variable
+            name="quote"
+            type="com.example.stockwatcher.api.models.StockQuote" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,7 +41,7 @@
             android:layout_marginTop="8dp"
             android:paddingEnd="20dp"
             android:paddingBottom="20dp"
-            android:text="@{stock.tickerSymbol}"
+            android:text="@{searchSymbol.symbol}"
             android:textSize="20sp"
             app:layout_constraintStart_toEndOf="@id/growthIndicator"
             app:layout_constraintTop_toTopOf="parent" />
@@ -46,47 +50,69 @@
             android:id="@+id/companyNameTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
             android:ellipsize="marquee"
-            android:text="@{stock.fullName}"
+            android:text="@{searchSymbol.instrumentName}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/valueTextView"
+            app:layout_constraintEnd_toStartOf="@+id/openTextView"
             app:layout_constraintStart_toStartOf="@+id/tickerTextView"
             app:layout_constraintTop_toBottomOf="@+id/tickerTextView" />
 
+
         <TextView
-            android:id="@+id/valueTextView"
-            android:layout_width="wrap_content"
+            android:id="@+id/exchangeTextView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            app:floatToString="@{stock.value}"
-            android:textSize="22sp"
-            android:textAlignment="textEnd"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:ellipsize="marquee"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="@{searchSymbol.exchange}"
+            app:layout_constraintEnd_toEndOf="@+id/companyNameTextView"
+            app:layout_constraintStart_toEndOf="@+id/tickerTextView"
             app:layout_constraintTop_toTopOf="@+id/tickerTextView" />
 
         <TextView
+            android:id="@+id/countryTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            app:floatToString="@{stock.change}"
+            android:layout_marginEnd="10dp"
+            android:ellipsize="marquee"
+            android:text="@{searchSymbol.country}"
+            app:layout_constraintEnd_toEndOf="@+id/companyNameTextView"
+            app:layout_constraintStart_toEndOf="@+id/tickerTextView"
+            app:layout_constraintTop_toBottomOf="@+id/exchangeTextView" />
+
+
+        <TextView
+            android:id="@+id/openTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{quote.open}"
+            android:textSize="25sp"
             android:textAlignment="textEnd"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tickerTextView"
-            app:layout_constraintEnd_toEndOf="@+id/valueTextView"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/valueTextView"
-            app:layout_constraintTop_toTopOf="@+id/companyNameTextView" />
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/changeTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{quote.change}"
+            android:textAlignment="textEnd"
+            app:layout_constraintEnd_toEndOf="@id/openTextView"
+            app:layout_constraintStart_toStartOf="@id/openTextView"
+            app:layout_constraintTop_toBottomOf="@id/openTextView" />
 
         <View
+            android:id="@+id/view4"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/light_gray"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            />
+            tools:layout_editor_absoluteX="10dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

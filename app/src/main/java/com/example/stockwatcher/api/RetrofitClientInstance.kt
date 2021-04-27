@@ -6,6 +6,8 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import com.example.stockwatcher.api.config.TwelveDataAPIConfig
+import com.example.stockwatcher.api.config.NewsAPIConfig
 
 class RetrofitClientInstance {
 
@@ -13,29 +15,17 @@ class RetrofitClientInstance {
         @JvmStatic
         private var retrofit: Retrofit? = null
 
-
         @JvmStatic
         private var retrofitTickerLookup: Retrofit? = null
 
-        private val key = "65d060beb5aa4b30be79716bc3c6dbf1"
-        private val baseUrl = "https://newsapi.org/here/"
+//        private val key = "65d060beb5aa4b30be79716bc3c6dbf1"
+//        private val baseUrl = "https://newsapi.org/here/"
 
-        //IEX
-        private val IEX_SANDBOX_BASE_URL = "https://sandbox.iexapis.com"
-        private val IEX_SANBOX_TOKEN = "Tpk_4083caf83bde4e94b709e982d5c97da1"
-        const val IEX_VERSION = "stable/"
-
-        //query=aa : aa is the search term
-        //apiKey is demo
-//        const val TICKER_LOOKUP_BASE_URL = "https://financialmodelingprep.com"
-//        const val TICKER_LOOKUP_VERSION = "api/v3/"
-//        const val TICKER_LOOKUP_API_KEY= "demo"
-//        const val TICKER_LOOKUP_DEFAULT_LIMIT = "10"
     }
 
     fun instance():Retrofit?{
         val logger = HttpLoggingInterceptor()
-        val okHttpClient = constructOkClientBuilder(mapOf("apiKey" to key))
+        val okHttpClient = constructOkClientBuilder(mapOf("apiKey" to NewsAPIConfig.KEY))
         if(retrofit==null) {
 
             logger.level = HttpLoggingInterceptor.Level.HEADERS
@@ -44,7 +34,7 @@ class RetrofitClientInstance {
             client.connectTimeout(30, TimeUnit.SECONDS)
 
             retrofit = Retrofit.Builder()
-                    .baseUrl(baseUrl)
+                    .baseUrl(NewsAPIConfig.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                     .client(client.build())
@@ -53,9 +43,9 @@ class RetrofitClientInstance {
         return retrofit
     }
 
-    fun instanceRetrofitIEX(): Retrofit?{
+    fun stockReferenceRetrofitInstance(): Retrofit?{
         val logger = HttpLoggingInterceptor()
-        val okHttpClient = constructOkClientBuilder(mapOf("token" to IEX_SANBOX_TOKEN))
+        val okHttpClient = constructOkClientBuilder(mapOf("apikey" to TwelveDataAPIConfig.API_KEY))
         if(retrofitTickerLookup==null) {
 
             logger.level = HttpLoggingInterceptor.Level.HEADERS
@@ -64,7 +54,7 @@ class RetrofitClientInstance {
             client.connectTimeout(30, TimeUnit.SECONDS)
 
             retrofitTickerLookup = Retrofit.Builder()
-                    .baseUrl(IEX_SANDBOX_BASE_URL)
+                    .baseUrl(TwelveDataAPIConfig.BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                     .client(client.build())
