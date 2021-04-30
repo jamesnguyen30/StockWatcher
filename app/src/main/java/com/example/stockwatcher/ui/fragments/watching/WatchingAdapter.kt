@@ -5,19 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stockwatcher.api.models.SearchSymbol
-import com.example.stockwatcher.data.models.RetroPhoto
-import com.example.stockwatcher.data.models.Stock
 import com.example.stockwatcher.databinding.TickerItemViewHolderBinding
 
-class WatchingAdapter: RecyclerView.Adapter<TickerItemViewHolder> {
+class WatchingAdapter: RecyclerView.Adapter<TickerItemViewHolder>() {
 
-    var mockArray:ArrayList<SearchSymbol> = ArrayList()
-    var context: Context?
-
-
-    constructor(){
-        context = null
-    }
+    private var mockArray:ArrayList<SearchSymbol> = ArrayList()
+    private var context: Context? = null
 
     init{
         mockArray = ArrayList()
@@ -71,6 +64,19 @@ class WatchingAdapter: RecyclerView.Adapter<TickerItemViewHolder> {
     override fun onBindViewHolder(holder: TickerItemViewHolder, position: Int) {
         var stock = mockArray.get(position)
         holder.bind(stock)
+    }
+
+    fun removeAt(position: Int){
+        mockArray.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
+    fun swap(from: Int, to: Int){
+        with(mockArray[from]){
+            mockArray[from] = mockArray[to]
+            mockArray[to] = this
+        }
+        notifyItemMoved(from, to)
     }
 
 }

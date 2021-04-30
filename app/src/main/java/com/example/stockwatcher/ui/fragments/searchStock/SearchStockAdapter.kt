@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stockwatcher.api.models.SearchSymbol
-import com.example.stockwatcher.data.models.Stock
 import com.example.stockwatcher.databinding.TickerItemViewHolderBinding
 import com.example.stockwatcher.ui.fragments.watching.TickerItemViewHolder
 
