@@ -8,7 +8,7 @@ import java.lang.ref.WeakReference
 abstract class BaseViewModel<T> : ViewModel(){
 
     private var mCompositeDisposable: CompositeDisposable = CompositeDisposable()
-    private var navigator:WeakReference<T>? = null;
+    protected var navigator:WeakReference<T>? = null
 
     override fun onCleared() {
         println("dispose observable")

@@ -6,8 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stockwatcher.custom.runningStock.RunningStockLayoutManager
 import com.example.stockwatcher.databinding.FragmentRunningStockBinding
-import com.example.stockwatcher.ui.activities.MainActivity
-import com.example.stockwatcher.ui.fragments.watching.WatchingFragment
+import com.example.stockwatcher.ui.activities.main.MainActivity
 
 class RunningStockFragment : Fragment(){
 

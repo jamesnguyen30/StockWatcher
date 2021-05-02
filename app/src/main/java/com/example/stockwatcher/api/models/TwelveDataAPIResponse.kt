@@ -7,6 +7,41 @@ data class SearchResponse(
         @SerializedName(value="status") var status: String
 )
 
+data class TimeSeriesResponse(
+        @SerializedName(value="meta") var meta: TimeSeriesMeta,
+        @SerializedName(value="values") var values: List<TimeSeriesValue>,
+        @SerializedName(value="status") var status: String
+)
+
+data class TimeSeriesMeta(
+        @SerializedName("currency")
+        val currency: String,
+        @SerializedName("exchange")
+        val exchange: String,
+        @SerializedName("exchange_timezone")
+        val exchangeTimezone: String,
+        @SerializedName("interval")
+        val interval: String,
+        @SerializedName("symbol")
+        val symbol: String,
+        @SerializedName("type")
+        val type: String
+)
+data class TimeSeriesValue(
+        @SerializedName("close")
+        val close: String,
+        @SerializedName("datetime")
+        val datetime: String,
+        @SerializedName("high")
+        val high: String,
+        @SerializedName("low")
+        val low: String,
+        @SerializedName("open")
+        val `open`: String,
+        @SerializedName("volume")
+        val volume: String
+)
+
 data class SearchSymbol(
         @SerializedName(value="symbol") var symbol: String,
         @SerializedName(value="instrument_name") var instrumentName: String,

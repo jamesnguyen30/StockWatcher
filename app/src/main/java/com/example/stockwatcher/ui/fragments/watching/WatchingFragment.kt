@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stockwatcher.R
 import com.example.stockwatcher.databinding.FragmentWatchingBinding
-import com.example.stockwatcher.ui.activities.MainActivity
+import com.example.stockwatcher.ui.activities.main.MainActivity
 import com.example.stockwatcher.ui.helpers.WatchingListItemTouchHelper
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 

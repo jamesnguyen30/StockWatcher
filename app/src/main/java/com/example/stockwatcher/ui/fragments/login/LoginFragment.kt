@@ -16,9 +16,8 @@ import androidx.navigation.Navigation
 import com.example.stockwatcher.R
 import com.example.stockwatcher.databinding.FragmentLoginBinding
 import com.example.stockwatcher.ui.activities.LoginActivity
-import com.example.stockwatcher.ui.activities.MainActivity
+import com.example.stockwatcher.ui.activities.main.MainActivity
 import com.example.stockwatcher.ui.fragments.news.NewsFragmentBottomSheet
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject

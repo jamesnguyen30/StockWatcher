@@ -1,25 +1,19 @@
-package com.example.stockwatcher.ui.activities
+package com.example.stockwatcher.ui.activities.main
 
-import android.app.Activity
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.stockwatcher.R
 import com.example.stockwatcher.databinding.ActivityMainBinding
-import com.example.stockwatcher.ui.fragments.runningStock.RunningStockFragment
-import com.example.stockwatcher.ui.fragments.searchStock.SearchStockFragment
 import com.example.stockwatcher.ui.fragments.watching.WatchingFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainNavigator {
     lateinit var binding: ActivityMainBinding
     private var watchList: ArrayList<String>? = null;
+
+    var mainViewModel = MainViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +53,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         loadSavedWatchList()
+
+        if(watchList!=null && watchList!!.size != 0){
+            mainViewModel.setNavigator(this)
+            mainViewModel.symbolList = watchList!!.toList()
+            mainViewModel.startFetchingData()
+        }
     }
 
     fun startWatchingFragment(){
@@ -121,5 +121,17 @@ class MainActivity : AppCompatActivity() {
             }
             transaction.commit()
         }
+    }
+
+    override fun showLoadingIndicator() {
+        TODO("Not yet implemented")
+    }
+
+    override fun hideLoadingIndicator() {
+        TODO("Not yet implemented")
+    }
+
+    override fun requestError() {
+        TODO("Not yet implemented")
     }
 }
