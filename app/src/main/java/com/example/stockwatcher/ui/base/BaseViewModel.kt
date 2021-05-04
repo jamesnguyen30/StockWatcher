@@ -24,6 +24,10 @@ abstract class BaseViewModel<T> : ViewModel(){
         mCompositeDisposable.add(disposable)
     }
 
+    protected fun clearDisposables(){
+        mCompositeDisposable.clear()
+    }
+
     fun getNavigator(): T?{
         return navigator!!.get();
     }

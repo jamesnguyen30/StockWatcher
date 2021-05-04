@@ -3,9 +3,12 @@ package com.example.stockwatcher.ui.activities.main
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import com.example.stockwatcher.R
+import com.example.stockwatcher.api.models.StockQuote
 import com.example.stockwatcher.databinding.ActivityMainBinding
 import com.example.stockwatcher.ui.fragments.watching.WatchingFragment
 
@@ -59,6 +62,11 @@ class MainActivity : AppCompatActivity(), MainNavigator {
             mainViewModel.symbolList = watchList!!.toList()
             mainViewModel.startFetchingData()
         }
+
+        mainViewModel.stockQuoteLiveData.observe(this,
+                Observer<Map<String, StockQuote>> {
+            Toast.makeText(this@MainActivity, "Quote is updated", Toast.LENGTH_SHORT).show()
+        })
     }
 
     fun startWatchingFragment(){
@@ -121,6 +129,10 @@ class MainActivity : AppCompatActivity(), MainNavigator {
             }
             transaction.commit()
         }
+    }
+
+    override fun stockDataIsUpdated() {
+//        Toast.makeText(this, "Stock is Updated", Toast.LENGTH_SHORT).show()
     }
 
     override fun showLoadingIndicator() {

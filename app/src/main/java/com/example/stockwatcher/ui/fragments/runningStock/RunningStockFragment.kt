@@ -53,16 +53,7 @@ class RunningStockFragment : Fragment(){
 
     override fun onResume() {
         super.onResume()
-
         recyclerView.smoothScrollToPosition(adapter.itemCount)
 
     }
-
-//    private fun startWatchingFragment(){
-//        //Bring up BottomSheetView
-//        var watchingFragment = WatchingFragment()
-//        activity?.supportFragmentManager?.let{
-//            watchingFragment.show(it, "WatchingFragment")
-//        }
-//    }
 }

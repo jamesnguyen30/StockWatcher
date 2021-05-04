@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="stock"
-            type="com.example.stockwatcher.api.models.MinimizedStock" />
+            name="stockQuote"
+            type="com.example.stockwatcher.api.models.StockQuote" />
     </data>
 
     <LinearLayout
@@ -21,21 +21,21 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{stock.name}"
+            android:text="@{stockQuote.symbol}"
             android:textSize="15sp"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:floatToString="@{stock.value}"
+            android:text="@{stockQuote.close}"
             android:textSize="15sp"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:floatToString="@{stock.change}"
+            android:text="@{stockQuote.change}"
             android:textSize="15sp"
             />
 

@@ -1,6 +1,8 @@
 package com.example.stockwatcher.ui.activities.main
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.stockwatcher.api.RetrofitClientInstance
 import com.example.stockwatcher.api.config.TwelveDataAPIConfig
 import com.example.stockwatcher.api.models.StockQuote
@@ -8,25 +10,36 @@ import com.example.stockwatcher.api.models.TimeSeriesResponse
 import com.example.stockwatcher.api.services.TwelveDataAPI
 import com.example.stockwatcher.ui.base.BaseViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable.interval
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import java.util.*
-import kotlin.collections.ArrayList
+import java.util.concurrent.TimeUnit
 
 class MainViewModel : BaseViewModel<MainNavigator>(){
 
     lateinit var twelveDataAPI: TwelveDataAPI
 
-    private var stockQuoteDataStore: Map<String, StockQuote>? = null
-    private var timeSeriesDataStore: Map<String, TimeSeriesResponse>? = null
+//    private var stockQuoteDataStore: Map<String, StockQuote>? = null
+//    private var timeSeriesDataStore: Map<String, TimeSeriesResponse>? = null
+
+    val stockQuoteLiveData: MutableLiveData<Map<String, StockQuote>> = MutableLiveData()
+    val timeSeriesLiveData: MutableLiveData<Map<String, TimeSeriesResponse>> = MutableLiveData()
 
     var symbolList: List<String>?=null
-        get() = field
-        set(value){
-            field=value
-        }
 
-    fun getQuotes(){
+    private fun createFetchingObservable(intervalInMilliseconds: Long = 10000){
+        var disposable =
+                interval(500, intervalInMilliseconds, TimeUnit.MILLISECONDS)
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe {
+                            getQuotes()
+                            //TODO timeSeriesLiveData isn't called to save API request count
+                        }
+        addToDisposable(disposable)
+    }
+
+    private fun getQuotes(){
         symbolList?.let {
             symbolList->
             var listToString = symbolList!!.joinToString(",")
@@ -39,7 +52,8 @@ class MainViewModel : BaseViewModel<MainNavigator>(){
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
                             Log.d("MainViewModel", it.toString())
-                            stockQuoteDataStore = it
+//                            stockQuoteDataStore = it
+                            stockQuoteLiveData.value = it
                         }, {
                             handleError(it)
                         })
@@ -50,18 +64,17 @@ class MainViewModel : BaseViewModel<MainNavigator>(){
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
                             Log.d("MainViewModel", it.toString())
-                            var soleItem = symbolList[0]
-                            stockQuoteDataStore = mapOf(soleItem to it)
+//                            stockQuoteDataStore = mapOf(symbolList[0] to it)
+                            stockQuoteLiveData.value = mapOf(symbolList[0] to it)
                         }, {
                             handleError(it)
                         })
             }
-
             addToDisposable(dispoable)
         }
     }
 
-    fun getTimeSeries(){
+    private fun getTimeSeries(){
         symbolList?.let { symbolList ->
             var listToString = symbolList.joinToString(",")
             var dispoable: Disposable
@@ -71,7 +84,7 @@ class MainViewModel : BaseViewModel<MainNavigator>(){
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
-                            timeSeriesDataStore = it
+                            timeSeriesLiveData.value = it
                         }, {
                             handleError(it)
                         })
@@ -80,12 +93,11 @@ class MainViewModel : BaseViewModel<MainNavigator>(){
                         .subscribeOn(Schedulers.newThread())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe({
-                            timeSeriesDataStore = mapOf(symbolList[0] to it)
+                            timeSeriesLiveData.value = mapOf(symbolList[0] to it)
                         }, {
                             handleError(it)
                         })
             }
-
             addToDisposable(dispoable)
         }
     }
@@ -98,8 +110,12 @@ class MainViewModel : BaseViewModel<MainNavigator>(){
         navigator ?: throw java.lang.Exception("MainNavigator is null in MainViewHolder")
 
         twelveDataAPI = RetrofitClientInstance().stockReferenceRetrofitInstance()!!.create(TwelveDataAPI::class.java)
-        getQuotes()
-        getTimeSeries()
+
+        createFetchingObservable()
+    }
+
+    fun stopFetchingData(){
+        clearDisposables()
     }
 
     fun handleQuoteResponse(response: StockQuote){
@@ -109,6 +125,7 @@ class MainViewModel : BaseViewModel<MainNavigator>(){
     fun handleError(throwable: Throwable){
         Log.d("MainViewModel Error", throwable.toString())
     }
+
 
 
 

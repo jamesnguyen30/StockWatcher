@@ -5,11 +5,12 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.stockwatcher.api.models.MinimizedStock
+import com.example.stockwatcher.api.models.StockQuote
 import com.example.stockwatcher.databinding.RunningStockViewHolderBinding
 
 class RunningStockViewHolder(private var binding: RunningStockViewHolderBinding): RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(stock: MinimizedStock) {
-        binding.stock = stock;
+    fun bind(stockQuote: StockQuote) {
+        binding.stockQuote = stockQuote;
     }
 }

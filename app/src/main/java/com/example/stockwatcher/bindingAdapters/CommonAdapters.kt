@@ -1,5 +1,6 @@
 package com.example.stockwatcher.bindingAdapters
 
+import android.graphics.Color
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -24,6 +25,15 @@ class CommonAdapter{
                        .transform(MultiTransformation(CenterCrop(), RoundCornerTransformation(25f)))
                        .into(imageView)
            }
+       }
+       @BindingAdapter("stockChangeColor")
+       @JvmStatic
+       fun stockChangeColor(textView: TextView, change: String){
+            if(change.first() == '-'){
+                textView.setTextColor(Color.RED)
+            } else {
+                textView.setTextColor(Color.GREEN)
+            }
        }
    }
 
